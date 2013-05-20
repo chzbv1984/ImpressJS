@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="http://xiaowa.org/favicon.ico">
+<script type="text/javascript" src="js/jquery-min-1.7.js"></script>
 <title>豆瓣喜剧片TOP600....XIAOWA</title>
 </head>
 <body>
@@ -2972,5 +2973,12 @@ center;" title="从豆瓣打开" target="_blank"><a href="http://movie.douban.co
   a.douban_href{text-decoration:none;}
   #remove_tvs{font-size:12px;}
 </style>
+<script type="text/javascript">
+ 
+  $('td.douban_terror600-yk').each(function(){
+   var w=$(this).prev().prev().prev().prev().innerHTML;
+		$(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
+	});
+</script>
 </body>
 </html>
