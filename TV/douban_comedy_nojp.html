@@ -27,6 +27,10 @@
   $("a.movie_title").click(function(){
      return false;
   });  
+  $('td.douban_terror600-yk').each(function(){
+  	var w=$(this).prev().prev().prev().prev().find('a').attr('title');
+		$(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
+	});
 </script>
 </body>
 </html>
