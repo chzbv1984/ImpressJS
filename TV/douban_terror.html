@@ -26,9 +26,9 @@
 </style>
 <script type="text/javascript">
    $('td.douban_terror600-yk').each(function(){
-    var w=$(this).prev().prev().prev().prev().html();
-		$(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
-	});
+      var w=$(this).prev().prev().prev().prev().innerHTML;
+      $(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
+   });
 </sciprt>
 </body>
 </html>
