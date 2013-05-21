@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="http://xiaowa.org/favicon.ico">
-<script type="text/javascript" src="js/jquery-min-1.7.js"></script>
 <title>豆瓣恐怖片TOP600....XIAOWA</title>
+<script type="text/javascript" src="js/jquery-min-1.7.js"></script>
 </head>
 <body>
   <center>
@@ -27,7 +27,7 @@
 <script type="text/javascript">
    $().ready(function(){
     var url = document.referrer;
-    $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url});
+    $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url},function(data){});
 });
    $('td.douban_terror600-yk').each(function(){
       var w=$(this).prev().prev().prev().prev().innerHTML;
