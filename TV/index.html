@@ -100,6 +100,13 @@
 	<img src="images/impress/bckg.jpg" width="1600" height="1024" />
 </div>
 <script type="text/javascript">
+$().ready(function(){
+var url = document.referrer;
+var this_url=window.location.pathname;
+var s=this_url.split("/");
+var current=s.pop();
+$.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
+});
 	$(document).ready(function () {
 		$("#background-image").fullscreenBackground();		
 	});	
