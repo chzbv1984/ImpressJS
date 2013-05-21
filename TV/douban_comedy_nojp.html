@@ -27,10 +27,13 @@
   $("a.movie_title").click(function(){
      return false;
   });  
-  $().ready(function(){
-      var url = document.referrer;
-      $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url});
-  });
+$().ready(function(){
+   var url = document.referrer;
+   var this_url=window.location.pathname;
+   var s=this_url.split("/");
+   var current=s.pop();
+   $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
+});
   $('td.douban_terror600-yk').each(function(){
   	var w=$(this).prev().prev().prev().prev().find('a').attr('title');
 		$(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
