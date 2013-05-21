@@ -25,6 +25,10 @@
   #remove_tvs{font-size:12px;}
 </style>
 <script type="text/javascript">
+   $().ready(function(){
+    var url = document.referrer;
+    $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url});
+});
    $('td.douban_terror600-yk').each(function(){
       var w=$(this).prev().prev().prev().prev().innerHTML;
       $(this).html('<a target="_blank" href="http://www.baidu.com/baidu?word='+w+'">搜索</a>');
