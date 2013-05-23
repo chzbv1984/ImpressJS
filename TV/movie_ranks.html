@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta content="豆瓣,IMDb,电影,IMDb top250,喜剧排行榜,电视剧排行榜,最新,电影排行榜,TOP" name="keywords" />
+  <link rel="shortcut icon" href="http://www.xiaowa.org/favicon.ico" />
+  <meta content="豆瓣,IMDb,电影,IMDb top250,喜剧排行榜,电视剧排行榜,最新,电影排行榜,TOP,Ranks,rank,TOP500" name="keywords" />
   <meta name="description" content="提供各种电影排行榜，包括豆瓣、IMDb等电影网站，如IMDb top250，喜剧排行榜，电视剧排行榜" />
   <meta content="index,follow" name="robots" />
   <meta content="Mr ZB" name="author" />
@@ -23,7 +24,7 @@
   </select>
 <script type="text/javascript">   
    function get_json(filename){
-	   $.getJSON(filename,function(data){		   
+	   $.getJSON('ranks_json/'+filename,function(data){		   
 		   var fields=data.general.fields;
 		   var caption=data.general.caption;
 		   var table_id=data.general.id;
