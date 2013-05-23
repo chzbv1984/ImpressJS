@@ -24,7 +24,7 @@
   </select>
 <script type="text/javascript">   
    function get_json(filename){
-	   $.getJSON('ranks_json/'+filename,function(data){		   
+	   $.getJSON('rank_json/'+filename,function(data){		   
 		   var fields=data.general.fields;
 		   var caption=data.general.caption;
 		   var table_id=data.general.id;
@@ -87,7 +87,7 @@
 	  
 	   $("#select_rank").change(function(){
 		   //$("#loading").show();
-		   $("#rank_div").html('<p id="loading"><img src="images/ajax/loading.gif" />正在加载数据...</p>');
+		   $("#rank_div").html('<p id="loading"><img src="images/loading.gif" />正在加载数据...</p>');
 		   var rank=$(this).val();
 		   var filename=rank+'.json';
 		  // $("#rank_div").html('');
@@ -96,7 +96,7 @@
 	   });
    });
 </script>
-  <div id="rank_div"><p id="loading"><img src="images/ajax/loading.gif" />正在加载数据...</p></div>
+  <div id="rank_div"><p id="loading"><img src="images/loading.gif" />正在加载数据...</p></div>
   <p>Powered by:Mr ZB</p>
   </center>
   
