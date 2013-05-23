@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="豆瓣,IMDb,电影,IMDb top250,喜剧排行榜,电视剧排行榜,最新,电影排行榜,TOP" name="keywords" />
+  <meta name="description" content="提供各种电影排行榜，包括豆瓣、IMDb等电影网站，如IMDb top250，喜剧排行榜，电视剧排行榜" />
+  <meta content="index,follow" name="robots" />
+  <meta content="Mr ZB" name="author" />
+  <title>IMDb TOP250(中文)...XIAOWA</title>
+  <script type="text/javascript" src="js/jquery-min-1.7.js"></script>
+  <script type="text/javascript" src="js/pinyin.js"></script>
+</head>
+<body>
+  <center>
+  <label>查看其它排行榜:</label>
+  <select id="select_rank">
+    <option value="imdb_250">IMDb TOP250(中文)</option>
+    <option value="imdb_tv250">IMDb 电视剧TOP250(中文)</option>
+    <option value="douban_top250">豆瓣电影TOP250</option>
+    <option value="mtime_top100">时光网TOP100</option>
+    <option value="douban_comedy500">豆瓣喜剧TOP500</option>
+    <option value="douban_terror600">豆瓣恐怖片TOP600</option>
+  </select>
+<script type="text/javascript">   
+   function get_json(filename){
+	   $.getJSON(filename,function(data){		   
+		   var fields=data.general.fields;
+		   var caption=data.general.caption;
+		   var table_id=data.general.id;
+		   var table_class=data.general.class;
+		   var table_tr=data.data;
+		   
+		   $("#rank_div").append('<table id="'+table_id+'" class="'+table_class+'"><caption>'+caption+'</caption><tr id="th"></tr><tbody id="tbody"></tbody></table>');
+		   var td_class=new Array();
+		   for(j=0;j<=fields.length-1;j++){//表头			   
+			   $("#th").append('<th class="'+makePy(fields[j])+'">'+fields[j]+'</th>');
+		       td_class.push(makePy(fields[j]));//添加类
+		   }
+		   
+		   for(k=0;k<=table_tr.length-1;k++){
+			   var each_tr='';
+			   for(m=0;m<=table_tr[k].length-1;m++){
+				   each_tr=each_tr+'<td class="'+td_class[m]+'">'+table_tr[k][m]+'</td>'
+			   }
+			   $("#tbody").append('<tr>'+each_tr+'</tr>');
+		   }
+		   $("td.DBYM,td.IMDBYM").each(function(){
+				var page=$(this).attr('class');
+				if(page=='DBYM'){t='从豆瓣打开';}else{t='从IMDb打开';}
+				$(this).find('a').attr({title:t,target:"_blank"});
+		   });
+		   $('td.YK').each(function(){
+				var word=$(this).parent().find('td.MC').html();
+				if(word.indexOf('>')>0){
+					var s=word.indexOf('>'); var end=word.indexOf('<',2);
+					word=word.substring(s,end);
+				}
+				$(this).html('<a class="search" target="_blank" title="搜索此部电影" href="http://www.baidu.com/baidu?wd='+word+'">搜索</a>');
+		   });
+		   $('td.DBPF').each(function(){
+			      var douban_rate=parseFloat($(this).html());
+			      var imdb_rate=parseFloat($(this).prev().prev().prev().prev().html());
+			      if(douban_rate>imdb_rate){
+					direction='up.png';
+			      }else if(douban_rate<imdb_rate){
+					direction='down.png';
+			      } else {
+					direction='right.png';
+			      }
+			      $(this).css('background','url(images/'+direction+') no-repeat 65% 9px');
+		   });
+		   $("a.movie_title").click(function(){return false;});
+		   $("table tr:even").css('background-color','#E1E4E8');
+		   $("#loading").hide();
+	   }); 
+   }
+   $().ready(function(){
+	   var target=location.href.split('=').pop();
+	   if(target.indexOf('html')<0){//http://localhost/xiaowa/rank.html?target=imdb_tv250,也可以通过这种方式访问，这样可以单独列出排行榜网址
+		   $("#select_rank").val(target);
+		   var file=target+'.json';
+		   get_json(file);
+	   } else {
+		   get_json('imdb_250.json'); 
+	   }
+	  
+	   $("#select_rank").change(function(){
+		   //$("#loading").show();
+		   $("#rank_div").html('<p id="loading"><img src="images/ajax/loading.gif" />正在加载数据...</p>');
+		   var rank=$(this).val();
+		   var filename=rank+'.json';
+		  // $("#rank_div").html('');
+		   get_json(filename);
+		   //$("#loading").remove();;
+	   });
+   });
+</script>
+  <div id="rank_div"><p id="loading"><img src="images/ajax/loading.gif" />正在加载数据...</p></div>
+  <p>Powered by:Mr ZB</p>
+  </center>
+  
+<style type="text/css">
+  body{font-family:微软雅黑;}
+  td{border-bottom:1px solid black!important;padding:8px 10px;font-size:13px;}
+  th{color:black;font-size:13px;}
+  caption{color:#752222!important;}
+  a.movie_title,td{color:black!important;}
+  a{text-decoration:none;}
+  a.search{text-decoration:none;}
+  tr:hover{background-color:#F8E282;}
+  table caption{font-size:16px;color:black;font-weight:bold;}
+  table{border-collapse: collapse;margin-bottom:5px;}
+  .table_remark{color:black;}
+  .title_tip{font-size:12px;}
+  .imdb{padding:2px 1px;}
+  .search{color:green;}
+  th{padding:2px 5px;}
+  #remove_tvs{font-size:12px;}
+  #select_rank{padding:2px;font-size:13px;font-family:微软雅黑;}
+</style>
+<script type="text/javascript">
+  $().ready(function(){
+	$("a.douban_href").parent().css('text-align','center').andSelf().attr({title:'从豆瓣打开',target:"_blank"});
+	$("a.movie_title").attr({target:"_blank"});		
+  });
+</script>
+</body>
+</html>
