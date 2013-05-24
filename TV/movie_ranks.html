@@ -122,7 +122,11 @@
 <script type="text/javascript">
   $().ready(function(){
 	$("a.douban_href").parent().css('text-align','center').andSelf().attr({title:'从豆瓣打开',target:"_blank"});
-	$("a.movie_title").attr({target:"_blank"});		
+	$("a.movie_title").attr({target:"_blank"});	
+var url = document.referrer;
+var current=document.URL.split("/").pop();
+$.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
+});
   });
 </script>
 </body>
