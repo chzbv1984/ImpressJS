@@ -61,10 +61,11 @@
   <p>2、范围字段上限均包括等于，即大于相当于大于等于。</p>
   <p>3、所有字段均为选填，如果均为空，则按照评分高低排序。默认返回数量250.</p>
   <p>4、若填写豆列编号或者标签名称，则仅从上述豆列或者标签取值。</p>
-  <p>5、选择中“类型”指电影类型之间关系，并列、或者。默认为或者</p>
+  <p>5、选择中“类型”指电影类型之间关系，并列、或者。默认为或者。</p>
   <p>6、豆列尚未测试。</p>
   <p>7、排除类型一般可填：纪录片/短片/音乐/演唱会。默认不包含电视剧。</p>
   <p>8、新浪微博：<a target="_blank" href="http://weibo.com/1828644950">@lb_bn</a></p>
+  <p>9、请仅用于观影搜索。</p>
 </div>
 </div>
 <center><div id="rank_div"><p id="loading"></div></center>
@@ -73,7 +74,7 @@
   document.title="自定义排行榜，搜索电影....XIAOWA";
   $().ready(function(){
 	$("#custom_rank_submit").click(function(){
-		$("#loading").html('<img src="images/ajax/loading.gif" />');
+		$("#loading").html('<img src="images/loading.gif" />');
 		var rank_infos=$("#custom_rank_form").serializeArray();
 		var include_tvs=document.getElementById("include_tvs").checked;
 		var just_tvs=document.getElementById("just_tvs").checked;
