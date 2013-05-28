@@ -25,6 +25,7 @@
     <option value="douban_action250">豆瓣动作片TOP250</option>
     <option value="douban_terror600">豆瓣恐怖片TOP600</option>
     <option value="douban_custom_tags_top">1920-1949电影TOP250（老片排行榜）</option>
+    <option value="douban_custom">自定义排行榜/搜索电影</option>
   </select>
 <script type="text/javascript">   
    function get_json(filename){
@@ -89,14 +90,17 @@
 		   get_json('imdb_250.json'); 
 	   }
 	  
-	   $("#select_rank").change(function(){
-		   //$("#loading").show();
-		   $("#rank_div").html('<p id="loading"><img src="images/loading.gif" />正在加载数据...</p>');
+	   $("#select_rank").change(function(){		   
 		   var rank=$(this).val();
+		   if(rank=='douban_custom'){
+			   top.location="http://www.xiaowa.org/custom_rank.html";
+			   return true;
+		   }
+		   var title=$("#select_rank").find("option:selected").text(); 
+		   document.title=title+'....XIAOWA';
+		   $("#rank_div").html('<p id="loading"><img src="images/ajax/loading.gif" />正在加载数据...</p>');		   
 		   var filename=rank+'.json';
-		  // $("#rank_div").html('');
 		   get_json(filename);
-		   //$("#loading").remove();;
 	   });
    });
 </script>
