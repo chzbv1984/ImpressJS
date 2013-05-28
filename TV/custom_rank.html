@@ -83,7 +83,7 @@
 			if(data.res=='success'){
 				$("#rank_div").fadeIn().empty();
 				$("#general_custom").fadeOut();
-				get_json('modules/'+data.filename);
+				get_json('http://www.xiaowa.org/modules/'+data.filename);
 			} else {
 			   alert(data.error);
 			}
