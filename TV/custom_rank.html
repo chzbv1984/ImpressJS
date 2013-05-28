@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="http://xiaowa.org/favicon.ico">
 <script type="text/javascript" src="js/jquery-min-1.7.js"></script>
-<title>豆瓣喜剧片TOP600....XIAOWA</title>
+<title>自定义排行榜....XIAOWA</title>
 </head>
 <body>
- <center>
+
    <script type="text/javascript" src="js/movie_rank.js"></script>
 <script type="text/javascript" src="js/pinyin.js"></script>
 <link rel="stylesheet" type="text/css"  href="js/movie_rank.css" />
@@ -68,6 +68,7 @@
 </div>
 </div>
 <div id="rank_div"><p id="loading"></div>
+<p>Powered by:Mr ZB</p>
 <script type="text/javascript">
   document.title="自定义排行榜，搜索电影....XIAOWA";
   $().ready(function(){
@@ -76,7 +77,7 @@
 		var rank_infos=$("#custom_rank_form").serializeArray();
 		var include_tvs=document.getElementById("include_tvs").checked;
 		var just_tvs=document.getElementById("just_tvs").checked;
-		$.post('modules/ajax.php',{action:'custom_rank',infos:rank_infos,tvs_in:include_tvs,just_tvs:just_tvs},function(data){
+		$.post('http://www.xiaowa.org/modules/ajax.php',{action:'custom_rank',infos:rank_infos,tvs_in:include_tvs,just_tvs:just_tvs},function(data){
 			//alert(data);return false;
 			if(data.res=='success'){
 				$("#rank_div").fadeIn().empty();
@@ -94,8 +95,7 @@
 	});
   });
 </script>
- <p>Powered by:Mr ZB</p>
- </center>
+ 
  <style type="text/css">
   #custom_rank_div,#rank_help {width:405px;margin:5px;float:left;}
   #rank_help{width:470px;}
