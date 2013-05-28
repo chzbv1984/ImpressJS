@@ -78,7 +78,7 @@
 		var rank_infos=$("#custom_rank_form").serializeArray();
 		var include_tvs=document.getElementById("include_tvs").checked;
 		var just_tvs=document.getElementById("just_tvs").checked;
-		$.post('modules/ajax.php',{action:'custom_rank',infos:rank_infos,tvs_in:include_tvs,just_tvs:just_tvs},function(data){
+		$.post('http://www.xiaowa.org/modules/ajax.php',{action:'custom_rank',infos:rank_infos,tvs_in:include_tvs,just_tvs:just_tvs},function(data){
 			//alert(data);return false;
 			if(data.res=='success'){
 				$("#rank_div").fadeIn().empty();
