@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="http://xiaowa.org/favicon.ico">
+<script type="text/javascript" src="js/jquery-min-1.7.js"></script>
+<title>豆瓣喜剧片TOP600....XIAOWA</title>
+</head>
+<body>
+ <center>
+   <script type="text/javascript" src="js/movie_rank.js"></script>
+<script type="text/javascript" src="js/pinyin.js"></script>
+<link rel="stylesheet" type="text/css"  href="css/movie_rank.css" />
+<div id="general_custom">
+<div id="custom_rank_div">
+  <form id="custom_rank_form">
+     <span class="option"><label>名称(选填)：</label><input type="text" size="30" name="rank_name" /></span> 
+     <span class="option"><label>返回数量：</label><input type="text" size="30" name="return_num" /></span>   
+     <span class="option"><label>影片类型：</label><input type="text" size="30" name="movie_type" /></span>
+     <span class="option"><label>排除类型：</label><input type="text" size="30" name="eliminate_movie_type" value="纪录片/短片/音乐/演唱会/舞台艺术/游戏" /></span>
+     <span class="option"><label>豆列编号(/)：</label><input type="text" size="30" name="doulist_ids" /></span>
+     <span class="option"><label>标签名称(/)：</label><input type="text" size="30" name="tag_names" /></span>
+     <span class="option"><label>影片评分：</label>
+         <select name="rate_range" id="rate_range">
+	       <option value="greater_than">大于</option>
+	       <option value="less_than">小于</option>
+	     </select>
+	     <input class="range" type="text" name="rate" />
+     </span>
+     <span class="option"><label>投票人数：</label>
+	     <select name="votes_range" id="votes_range">
+	       <option value="greater_than">大于</option>
+	       <option value="less_than">小于</option>
+	     </select>
+	     <input class="range" type="text" name="votes" />
+	</span>
+	<input type="hidden" name="rank_type" value="movie" />
+	<span class="option"><label>制片国家：</label><input type="text" size="30" name="country" /></span>
+	<span class="option"><label>排除国家：</label><input type="text" size="30" name="eliminate_country" /></span>
+	<span class="option"><label>影片长度：</label>
+	     <select name="length_range" id="length_range">
+	       <option value="greater_than">大于</option>
+	       <option value="less_than">小于</option>
+	     </select>
+	     <input class="range" type="text" name="length" />
+	</span>
+	<span class="option">
+	  <label class="text_middle">不包含电视剧：</label><input type="checkbox" checked="checked" name="include_tvs" id="include_tvs" />
+	  <label style="margin-left:8px;" class="text_middle">仅电视剧：</label><input type="checkbox" id="just_tvs" name="just_tvs" />
+	  <label style="margin-left:12px;color:green;" class="text_middle">类型：</label>
+	    <input type="radio" name="and" value="and" /><label class="text_middle">和</label>
+	    <input type="radio" checked="checked" name="and" value="or" /><label class="text_middle">或</label>
+	</span>
+	<span class="option">	 
+	 <input type="button" id="custom_rank_submit" name="submit" value="Submit" /><span id="loading"></span>
+	</span>
+  </form>
+</div>
+<div id="rank_help">
+  <p>说明：</p>
+  <p>1、影片类型、制片国家均以“/”分割，如“喜剧/爱情”。</p>
+  <p>2、范围字段上限均包括等于，即大于相当于大于等于。</p>
+  <p>3、所有字段均为选填，如果均为空，则按照评分高低排序。默认返回数量250.</p>
+  <p>4、若填写豆列编号或者标签名称，则仅从上述豆列或者标签取值。</p>
+  <p>5、选择中“类型”指电影类型之间关系，并列、或者。默认为或者</p>
+  <p>6、豆列尚未测试。</p>
+  <p>7、排除类型一般可填：纪录片/短片/音乐/演唱会。默认不包含电视剧。</p>
+</div>
+</div>
+<div id="rank_div"><p id="loading"></div>
+<script type="text/javascript">
+  document.title="自定义排行榜，搜索电影....XIAOWA";
+  $().ready(function(){
+	$("#custom_rank_submit").click(function(){
+		$("#loading").html('<img src="images/ajax/loading.gif" />');
+		var rank_infos=$("#custom_rank_form").serializeArray();
+		var include_tvs=document.getElementById("include_tvs").checked;
+		var just_tvs=document.getElementById("just_tvs").checked;
+		$.post('modules/ajax.php',{action:'custom_rank',infos:rank_infos,tvs_in:include_tvs,just_tvs:just_tvs},function(data){
+			//alert(data);return false;
+			if(data.res=='success'){
+				$("#rank_div").fadeIn().empty();
+				$("#general_custom").fadeOut();
+				get_json('modules/'+data.filename);
+			} else {
+			   alert(data.error);
+			}
+		},'json');
+	});
+
+	$(document).on('click',"#redo",function(){
+		$("#rank_div").fadeOut();
+		$("#general_custom").fadeIn();
+	});
+  });
+</script>
+ <p>Powered by:Mr ZB</p>
+ </center>
+ <style type="text/css">
+  #custom_rank_div,#rank_help {width:405px;margin:5px;float:left;}
+  #rank_help{width:470px;}
+  span.option {display:block;margin-top:8px;margin-right:15px;width:400px;line-height:30px;position:relative;}
+  label.text_middle{vertical-align:middle;}
+  span.option input[type=text] {position:absolute;left:100px;width:185px;}
+  input[type=radio]{vertical-align:middle;}
+  input.range{left:165px!important;width:120px!important;}
+  select {position:absolute;left:100px;}
+</style>
+<script type="text/javascript">
+ $().ready(function(){
+var url = document.referrer;
+var this_url=window.location.pathname;
+var s=this_url.split("/");
+var current=s.pop();
+//$.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
+});
+</script>
+</body>
+</html>
