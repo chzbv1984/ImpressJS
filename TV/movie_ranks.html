@@ -13,6 +13,7 @@
 </head>
 <body>
   <center>
+  <p>最新更新移步至<a href="http://www.xiaowa.org/movie_ranks.html">排行榜</a></p>
   <label>查看其它排行榜:</label>
   <select id="select_rank">
     <option value="imdb_250">IMDb TOP250(中文)</option>
@@ -138,7 +139,7 @@
 	$("a.movie_title").attr({target:"_blank"});	
 var url = document.referrer;
 var current=document.URL.split("/").pop();
-   $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
+  // $.post('http://www.xiaowa.org/addition/visit_github_log.php',{url:url,visit_url:current},function(data){});
   });
   $(document).on('click','#redo',function(){
   	return false;
